@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Final_Project_GUI</string>
+    <string name="welcome_to_anifinder">Welcome to AniFinder</string>
+    <string name="scan_an_image">Scan an Image</string>
+    <string name="upload_an_image">Upload an Image</string>
+    <string name="upload">Upload</string>
+    <string name="next">Next</string>
+    <string name="choose_image">Choose Image</string>
+    <string name="back">Back</string>
+
+</resources>

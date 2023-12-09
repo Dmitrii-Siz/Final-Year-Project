@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UploadImagePage">
+
+    <TextView
+        android:id="@+id/title_upload"
+        android:layout_width="334dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="125dp"
+        android:fontFamily="@font/playful_font"
+        android:text="@string/upload"
+        android:textAlignment="center"
+        android:textColor="#689F38"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/upload"
+        android:layout_width="221dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/rounded_btn"
+        android:fontFamily="@font/playful_font"
+        android:text="@string/next"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="90dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="28dp"
+        android:onClick="backButton"
+        android:text="@string/back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/display_image"
+        android:layout_width="301dp"
+        android:layout_height="225dp"
+        android:layout_marginTop="40dp"
+        android:src="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_upload"
+        tools:ignore="ImageContrastCheck"
+        android:contentDescription="TODO" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/chooseImage"
+        android:layout_width="121dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/rounded_btn"
+        android:fontFamily="@font/playful_font"
+        android:text="@string/choose_image"
+        app:layout_constraintBottom_toTopOf="@+id/upload"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/display_image" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
