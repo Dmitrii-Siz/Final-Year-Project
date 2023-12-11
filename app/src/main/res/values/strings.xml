@@ -7,5 +7,6 @@
     <string name="next">Next</string>
     <string name="choose_image">Choose Image</string>
     <string name="back">Back</string>
+    <string name="detected">I have Detected a</string>
 
 </resources>
