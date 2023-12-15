@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/page_title"
+        android:layout_width="337dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/playful_font"
+        android:text="@string/welcome_to_anifinder"
+        android:textAlignment="center"
+        android:textColor="#689F38"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/scan"
+        android:layout_width="241dp"
+        android:layout_height="193dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="85dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/scan_btn"
+        android:fontFamily="@font/playful_font"
+        android:onClick="scanButton"
+        android:text="@string/scan_an_image"
+        app:layout_constraintBottom_toTopOf="@+id/upload"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/page_title" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/upload"
+        android:layout_width="221dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/rounded_btn"
+        android:fontFamily="@font/playful_font"
+        android:onClick="uploadButton"
+        android:text="@string/upload_an_image"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scan" />
+</androidx.constraintlayout.widget.ConstraintLayout>
