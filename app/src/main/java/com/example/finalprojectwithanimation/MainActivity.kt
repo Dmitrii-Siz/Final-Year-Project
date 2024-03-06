@@ -10,6 +10,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         //Initial fragment (First fragment that will appear on the page):
         val initialFragment = InitialFragment()
         supportFragmentManager.beginTransaction()
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.teach -> {
-                    replaceFragment(TeachFragment())
+                    replaceFragment(LoadGameFragment())
                     true
                 }
                 else -> false

@@ -61,7 +61,7 @@ class CameraFragment : Fragment() {
                 val displayResultFragment = DisplayResultFragment.newInstance(bitmapImage!!)
                 val transaction = requireActivity().supportFragmentManager.beginTransaction()
                 transaction.replace(R.id.frameLayout, displayResultFragment)
-                transaction.addToBackStack(null) // Optional, to add the transaction to the back stack
+                transaction.addToBackStack(null)
                 transaction.commit()
             }
         }

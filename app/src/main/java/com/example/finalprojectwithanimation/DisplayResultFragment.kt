@@ -8,6 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+//ml model stuff:
+import com.example.finalprojectwithanimation.ml.Model
+import org.tensorflow.lite.DataType
+import org.tensorflow.lite.support.image.TensorImage
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 
 private const val ARG_IMAGE = "param1"
 
@@ -81,7 +86,7 @@ class DisplayResultFragment : Fragment() {
         }
         //display the animal name:
         val displayOut = view.findViewById<TextView>(R.id.output)
-        displayOut.text = "$predictedAnimalName"//maybe I will add some text here in the future
+        displayOut.text = "Animal Detected: $predictedAnimalName"//maybe I will add some text here in the future
 
         println("Probabilities:")
         for (i in outputFeature0.floatArray.indices) {

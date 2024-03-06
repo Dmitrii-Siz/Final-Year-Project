@@ -1,6 +1,5 @@
 package com.example.finalprojectwithanimation
 
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -78,7 +77,7 @@ class GalleryFragment : Fragment() {
             val displayResultFragment = DisplayResultFragment.newInstance(bitmapImage!!)
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.replace(R.id.frameLayout, displayResultFragment)
-            transaction.addToBackStack(null) // Optional, to add the transaction to the back stack
+            transaction.addToBackStack(null)
             transaction.commit()
         }
     }
