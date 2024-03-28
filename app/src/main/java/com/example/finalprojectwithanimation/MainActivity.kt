@@ -1,5 +1,6 @@
 package com.example.finalprojectwithanimation
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,11 +12,30 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        //Initial fragment (First fragment that will appear on the page):
-        val initialFragment = InitialFragment()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.frameLayout, initialFragment)
-            .commit()
+        //First time opening the app?
+        val preferences = getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE)
+        val alreadyOpened = preferences.getString("AlreadyOpened", "")
+
+
+        if(alreadyOpened.equals("Yes")){
+            //Not the first time of the user opening the App:
+            //Welcome back fragment:
+            val welcomebackFragment = WelcomeBackFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frameLayout, welcomebackFragment)
+                .commit()
+        }else{
+            //First time of the user opening the App:
+            val editor = preferences.edit()
+            editor.putString("AlreadyOpened", "Yes")
+            editor.apply()
+
+            //First Time fragment:
+            val initialFragment = InitialFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.frameLayout, initialFragment)
+                .commit()
+        }
 
         //bottom navigation:
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)

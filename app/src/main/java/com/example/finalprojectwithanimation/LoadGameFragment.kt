@@ -28,7 +28,7 @@ class LoadGameFragment : Fragment() {
             val gameFragment = GameFragment()
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.replace(R.id.frameLayout, gameFragment)
-            transaction.addToBackStack(null) // Optional, to add the transaction to the back stack
+            transaction.addToBackStack(null)
             transaction.commit()
         }
     }

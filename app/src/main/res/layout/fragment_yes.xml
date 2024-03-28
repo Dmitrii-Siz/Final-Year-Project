@@ -1,0 +1,105 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".YesFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id="@+id/explanation1"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/custom_bar"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:layout_marginLeft="5dp"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/ic_camera"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="275dp"
+                android:layout_height="wrap_content"
+                android:text="Our kitty's got the purrfect eye! Take photos with our feline friend and let him guess its species!"
+                android:textSize="20sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/explanation2"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/explanation1"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:layout_marginLeft="5dp"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/ic_gallery"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="275dp"
+                android:layout_height="wrap_content"
+                android:text="Whiskered wonders gallery awaits! Share your best shots and let our cat companion uncover wildlife wonders!"
+                android:textSize="20sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/explanation3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/explanation2"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:layout_marginLeft="5dp"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/ic_teach"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="275dp"
+                android:layout_height="wrap_content"
+                android:text="Kitty quizmaster at your service! Take our quiz with our feline friend and become an animal expert in no time!"
+                android:textSize="20sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                />
+        </LinearLayout>
+
+        <include
+            android:id="@+id/custom_bar"
+            layout="@layout/custom_bar" />
+
+        <VideoView
+            android:id="@+id/videoView3"
+            android:layout_width="250dp"
+            android:layout_height="200dp"
+            android:layout_below="@id/explanation3"
+            android:layout_alignParentEnd="true"
+            />
+
+
+
+
+    </RelativeLayout>
+
+</FrameLayout>
