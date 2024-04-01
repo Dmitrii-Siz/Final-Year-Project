@@ -1,13 +1,18 @@
 package com.example.finalprojectwithanimation
 
 import android.graphics.Bitmap
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.VideoView
 //ml model stuff:
 import com.example.finalprojectwithanimation.ml.Model
 import org.tensorflow.lite.DataType
@@ -38,12 +43,45 @@ class DisplayResultFragment : Fragment() {
         //save image from arguments to imageBitmap
         imageBitmap = arguments?.getParcelable(ARG_IMAGE)
 
+        //videoView:
+        val videoView: VideoView = view.findViewById(R.id.videoViewDisplay)
+        //animal name textView:
+        val displayOut = view.findViewById<TextView>(R.id.output)
+        displayOut.visibility = View.GONE
+
         //display the bitmap image in viewImage:
         imageBitmap?.let { bitmap ->
             view.findViewById<ImageView>(R.id.image).setImageBitmap(bitmap)
         }
         //resize the image to match the model's input parameters:
         val scaledBitmap = imageBitmap?.let { Bitmap.createScaledBitmap(it, 255, 255, false) }
+
+
+        //Animation Stuff:
+        // Set video path to the first MP4 file
+        videoView.setVideoPath("android.resource://${requireContext().packageName}/${R.raw.thinking_anim}")
+        //onComplete Listener for 1st animation:
+        videoView.setOnCompletionListener {
+            // Switch to the second MP4 file
+            videoView.setVideoPath("android.resource://${requireContext().packageName}/${R.raw.conclusion_anim}")
+            //onComplete Listener for 2nd animation:
+            videoView.setOnPreparedListener { mediaPlayer ->
+                //playing the 2nd animation once the first one is done
+                mediaPlayer.start()
+                videoView.setOnCompletionListener {
+                    // Make displayOut visible
+                    displayOut.visibility = View.VISIBLE
+                }
+            }
+        }
+        //playing the 1st animation
+        videoView.setOnPreparedListener { mediaPlayer ->
+            mediaPlayer.start()
+        }
+
+
+
+
 
         //model itself:
         val model = Model.newInstance(requireContext())
@@ -84,16 +122,16 @@ class DisplayResultFragment : Fragment() {
         } else {
             "Unknown"
         }
-        //display the animal name:
-        val displayOut = view.findViewById<TextView>(R.id.output)
-        displayOut.text = "Animal Detected: $predictedAnimalName"//maybe I will add some text here in the future
 
-        println("Probabilities:")
-        for (i in outputFeature0.floatArray.indices) {
-            val probability = outputFeature0.floatArray[i]
-            val animalName = animalNames.getOrElse(i) { "Unknown" }
-            println("$animalName: $probability")
-        }
+        displayOut.text = "I have detected a ${predictedAnimalName.capitalize()}"
+
+        //Testing purposes
+//        println("Probabilities:")
+//        for (i in outputFeature0.floatArray.indices) {
+//            val probability = outputFeature0.floatArray[i]
+//            val animalName = animalNames.getOrElse(i) { "Unknown" }
+//            println("$animalName: $probability")
+//        }
     }
 
     //static method (responsible for processing the arguments that were passed into the fragment):

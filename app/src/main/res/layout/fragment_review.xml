@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReviewFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        >
+
+
+        <TextView
+            android:id="@+id/questionNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Question "
+            android:layout_alignParentTop="true"
+            android:textColor="@color/orange_800"
+            android:textSize="28sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            />
+
+
+
+        <TextView
+            android:id="@+id/questionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Otters hold hands while sleeping to avoid drifting apart"
+            android:textSize="24sp"
+            android:padding="10dp"
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Answer:"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:paddingRight="8dp"
+                />
+
+            <TextView
+                android:id="@+id/userAnswer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="False"
+                android:textColor="@color/red_700"
+                android:textSize="24sp"
+                android:padding="8dp"
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:layout_marginTop="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Correct Answer:"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:paddingRight="8dp"
+                />
+
+            <TextView
+                android:id="@+id/correctAnswer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="True"
+                android:textColor="@color/green_700"
+                android:textSize="24sp"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/explanation"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No, while squirrels may become less active during winter, they do not hibernate in the same way as some other animals."
+            android:textSize="24sp"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/nextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:textColor="@color/white"
+            android:background="@drawable/custom_blue_button"
+            android:text="Next"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+
+    <include
+        android:id="@+id/custom_bar"
+        layout="@layout/custom_bar"></include>
+</FrameLayout>

@@ -26,10 +26,11 @@ class GameFragment : Fragment() {
     private lateinit var trueButton: Button
     private lateinit var falseButton: Button
     private lateinit var progressBar: ProgressBar
+    private lateinit var questionNumber: TextView
 
     //Keep track of the User's progress:
     private var totalCorrect: Int = 0
-    private val improvementList = ArrayList<String>()
+    private val improvementList = ArrayList<Fact>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +43,7 @@ class GameFragment : Fragment() {
         trueButton = view.findViewById(R.id.true_option)
         falseButton = view.findViewById(R.id.false_option)
         progressBar = view.findViewById(R.id.progressBar)
+        questionNumber = view.findViewById(R.id.questionNumber)
         //check answer is a method which checks whether the use has answered the question correctly or not:
         trueButton.setOnClickListener { checkAnswer(true) }
         falseButton.setOnClickListener { checkAnswer(false) }
@@ -98,8 +100,8 @@ class GameFragment : Fragment() {
 
         factsList.add(Fact("Grasshoppers can jump up to 20 times their body length.", "Yes, grasshoppers are powerful jumpers and can cover significant distances with their jumps.", true))
         factsList.add(Fact("Hamsters are rodents.", "Yes, hamsters belong to the rodent family and are small mammals with large cheek pouches.", true))
-        factsList.add(Fact("Hares are born with fur and open eyes.", "Yes, hares are precocial animals, meaning they are born relatively mature.", true))
-        factsList.add(Fact("Hedgehogs are immune to snake venom.", "No, while hedgehogs have some resistance to certain snake venoms, they are not immune.", false))
+        factsList.add(Fact("Hares are born with fur and open eyes.", "Yes, hares are precolonial animals, meaning they are born relatively mature.", true))
+        factsList.add(Fact("Hedgehogs are immune to snake venom.", "No, while hedgehogs have some resistance to certain snake venom, they are not immune.", false))
         factsList.add(Fact("Horses can sleep while standing up.", "Yes, horses can lock their knees to sleep while standing up.", true))
         factsList.add(Fact("Ladybugs are poisonous.", "No, ladybugs are not poisonous to humans, although they may emit a foul odor as a defense mechanism.", false))
         factsList.add(Fact("Lobsters can regenerate lost limbs.", "Yes, lobsters have the ability to regenerate lost limbs, although the process is slow.", true))
@@ -131,6 +133,8 @@ class GameFragment : Fragment() {
             val fact = factsList[factIndex]
             factTextView.text = fact.text//display the new fact
             progressBar.progress = currentFactIndex + 1
+            //Current Question number:
+            questionNumber.text="Question ${currentFactIndex + 1}"
             currentFactIndex++
         } else {
             //All questions answered:
@@ -153,7 +157,7 @@ class GameFragment : Fragment() {
         }
         //Wrong answer:
         else {
-            improvementList.add(fact.answer)//add the correct answers
+            improvementList.add(fact)//add fact
         }
         //Show the next fact
         showNextFact()

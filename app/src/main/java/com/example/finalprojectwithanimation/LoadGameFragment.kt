@@ -19,8 +19,12 @@ class LoadGameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Button:
+        //Buttons:
         val playButton: Button = view.findViewById(R.id.playButton)
+        val rulesButton: Button = view.findViewById(R.id.rulesButton)
+
+        //popup fragment:
+        val rulesPopupFragment = RulesPopupFragment()
 
         //Button event listener
         playButton.setOnClickListener {
@@ -30,6 +34,15 @@ class LoadGameFragment : Fragment() {
             transaction.replace(R.id.frameLayout, gameFragment)
             transaction.addToBackStack(null)
             transaction.commit()
+        }
+
+        //How to play Button event listener:
+        rulesButton.setOnClickListener {
+            //Displaying the popup:
+            requireActivity().supportFragmentManager.beginTransaction()
+                .add(android.R.id.content, rulesPopupFragment)
+                .addToBackStack(null)
+                .commit()
         }
     }
 }

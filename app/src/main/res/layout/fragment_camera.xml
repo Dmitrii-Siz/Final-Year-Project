@@ -8,17 +8,18 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="300dp"
-        android:layout_height="400dp"
+        android:layout_width="250dp"
+        android:layout_height="300dp"
         android:layout_gravity="top|center_horizontal"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="150dp"
+        />
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="151dp"
         android:layout_gravity="bottom|center_horizontal">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/captureButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,17 +28,27 @@
             android:layout_marginBottom="20dp"
             android:gravity="center_horizontal"
             android:text="Take Photo"
-            android:textSize="16dp" />
+            android:background="@drawable/custom_blue_button"
+            android:textColor="@color/white"
+            android:textSize="22sp" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/nextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="20dp"
+            android:textColor="@color/blue_800"
+            android:background="@drawable/custom_white_button"
             android:text="Next"
-            android:textSize="16dp" />
+            android:textSize="18sp" />
     </RelativeLayout>
+
+    <include
+        android:id="@+id/custom_bar"
+        layout="@layout/custom_bar"></include>
+
+
 
 </FrameLayout>

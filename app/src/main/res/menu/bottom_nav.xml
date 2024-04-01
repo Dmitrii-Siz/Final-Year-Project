@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:title="Camera"
         android:id="@+id/camera"
         android:icon="@drawable/ic_camera"
+        android:iconTint="@color/orange_800"
         />
     <item
         android:title="Gallery"
         android:id="@+id/gallery"
         android:icon="@drawable/ic_gallery"
+        android:iconTint="@color/orange_800"
         />
     <item
-        android:title="Teach"
+        android:title="Quiz"
         android:id="@+id/teach"
-        android:icon="@drawable/ic_teach"
+        android:icon="@drawable/ic_quiz"
+        android:iconTint="@color/orange_800"
         />
 </menu>

@@ -40,20 +40,33 @@ class MainActivity : AppCompatActivity() {
         //bottom navigation:
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         //Deselect all items in BottomNavigationView
-        bottomNavigationView.menu.setGroupCheckable(0, false, true)
-
+        bottomNavigationView.menu.setGroupCheckable(0, true, false)
+        bottomNavigationView.menu.apply {
+            findItem(R.id.camera).isChecked = false
+            findItem(R.id.gallery).isChecked = false
+            findItem(R.id.teach).isChecked = false
+        }
         bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.camera -> {
                     replaceFragment(CameraFragment())
+                    bottomNavigationView.menu.findItem(R.id.teach).isChecked = false
+                    bottomNavigationView.menu.findItem(R.id.camera).isChecked = true
+                    bottomNavigationView.menu.findItem(R.id.gallery).isChecked = false
                     true
                 }
                 R.id.gallery -> {
                     replaceFragment(GalleryFragment())
+                    bottomNavigationView.menu.findItem(R.id.teach).isChecked = false
+                    bottomNavigationView.menu.findItem(R.id.camera).isChecked = false
+                    bottomNavigationView.menu.findItem(R.id.gallery).isChecked = true
                     true
                 }
                 R.id.teach -> {
                     replaceFragment(LoadGameFragment())
+                    bottomNavigationView.menu.findItem(R.id.teach).isChecked = true
+                    bottomNavigationView.menu.findItem(R.id.camera).isChecked = false
+                    bottomNavigationView.menu.findItem(R.id.gallery).isChecked = false
                     true
                 }
                 else -> false

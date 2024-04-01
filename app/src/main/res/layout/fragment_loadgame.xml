@@ -14,61 +14,52 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Quiz!"
-            android:textSize="40sp"
-            android:layout_marginTop="50dp" />
+            android:textColor="@color/orange_900"
+            android:textSize="35sp"
+            android:layout_marginTop="110dp" />
+
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_width="225dp"
+            android:layout_height="200dp"
+            android:background="@drawable/kev_with_pencil"
+            android:layout_marginBottom="10dp"
+            >
+        </ImageView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Test your knowledge about various animals."
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:layout_marginTop="20dp"
             android:paddingHorizontal="25dp"
             android:textAlignment="center" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="How to play:"
-            android:textSize="24sp"
-            android:layout_marginTop="20dp"
-            android:paddingHorizontal="25dp"
-            android:textAlignment="center" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1. There will be a total of 10 Questions"
-            android:textSize="18sp"
-            android:layout_marginTop="10dp"
-            android:paddingHorizontal="30dp"
-            android:textAlignment="center" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2. Each question will have an Animal Fact."
-            android:textSize="18sp"
-            android:layout_marginTop="10dp"
-            android:paddingHorizontal="30dp"
-            android:textAlignment="center" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3. You decided whether it is True or False."
-            android:textSize="18sp"
-            android:layout_marginTop="10dp"
-            android:paddingHorizontal="30dp"
-            android:textAlignment="center" />
-
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/playButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Play"
-            android:textSize="24sp"
-            android:layout_marginTop="50dp" />
+            android:text="Start"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:background="@drawable/custom_blue_button"
+            android:layout_marginTop="30dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/rulesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="How To Play"
+            android:textColor="@color/blue_800"
+            android:background="@drawable/custom_white_button"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp" />
     </LinearLayout>
+
+    <include
+        android:id="@+id/custom_bar"
+        layout="@layout/custom_bar"></include>
 
 </FrameLayout>

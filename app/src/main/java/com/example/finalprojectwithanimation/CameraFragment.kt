@@ -27,6 +27,8 @@ class CameraFragment : Fragment() {
     //global variables:
     private lateinit var nextButton: Button//next fragment button
     private var bitmapImage: Bitmap? = null//image
+    private lateinit var captureButton: Button //Global variable
+    private lateinit var imageView: ImageView //global variable for the image
 
     //default onCreate fragment method:
     override fun onCreateView(
@@ -42,7 +44,14 @@ class CameraFragment : Fragment() {
         nextButton = view.findViewById(R.id.nextButton)
         nextButton.visibility = View.GONE
 
-        val captureButton: View = view.findViewById(R.id.captureButton)//button to take the picture
+        //button to take the picture
+        captureButton = view.findViewById(R.id.captureButton)
+
+        //default image for the imageView:
+        imageView = requireView().findViewById(R.id.image)
+        imageView.setImageResource(R.drawable.kev_with_camera)
+
+
 
         //event listener for the take photo button:
         captureButton.setOnClickListener {
@@ -110,7 +119,8 @@ class CameraFragment : Fragment() {
         startActivityForResult(intent, REQUEST_IMAGE_CAPTURE)
     }
 
-    //method that's called when startActivityForResult returns a result:
+    //method that's called when startActivityForResult returns true:
+    //displays the next button
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
@@ -121,6 +131,7 @@ class CameraFragment : Fragment() {
             imageView.setImageBitmap(bitmapImage)
             //make the next button visible and accessible:
             nextButton.visibility = View.VISIBLE
+            captureButton.text = "Retake Photo"
         }
     }
 }

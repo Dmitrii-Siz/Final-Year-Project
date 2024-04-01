@@ -24,6 +24,9 @@ class GalleryFragment : Fragment() {
     private lateinit var nextButton: Button//next fragment button
     private var bitmapImage: Bitmap? = null//image
 
+    //Choose photo button:
+    private lateinit var singleImagePickerBtn: Button
+
     //variable to store selected image URI
     private var selectedImageUri: Uri? = null
 
@@ -38,9 +41,11 @@ class GalleryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //choose image button and ImageView to display the image:
+        //Set the default image and locate the ImageView:
         val image = view.findViewById<ImageView>(R.id.image)
-        val singleImagePickerBtn = view.findViewById<Button>(R.id.choosePhoto)
+        image.setImageResource(R.drawable.kev_gallery)
+
+        singleImagePickerBtn = view.findViewById<Button>(R.id.choosePhoto)
         //hide the button to navigate onto the next fragment:
         nextButton = view.findViewById(R.id.nextButton)
         nextButton.visibility = View.GONE
@@ -58,6 +63,7 @@ class GalleryFragment : Fragment() {
                 if (bitmapImage != null) {
                     //make the next button visible and accessible:
                     nextButton.visibility = View.VISIBLE
+                    singleImagePickerBtn.text = "Choose Another"
                 }
                 else{
                     println("There is an Error with converting image URI to bitmap")

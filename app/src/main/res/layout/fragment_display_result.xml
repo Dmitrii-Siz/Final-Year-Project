@@ -7,25 +7,37 @@
 
     <ImageView
         android:id="@+id/image"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_gravity="top|right"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="125dp"
+        android:elevation="10dp"
+        />
+
+    <VideoView
+        android:id="@+id/videoViewDisplay"
         android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_gravity="top|center_horizontal"
-        android:layout_marginTop="20dp"/>
+        android:layout_height="220dp"
+        android:layout_gravity="center_vertical|left"
+        android:layout_marginLeft="-70dp"
+        ></VideoView>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="217dp"
-        android:layout_gravity="bottom|center_horizontal">
 
-        <TextView
-            android:id="@+id/output"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Animal Detected:"
-            android:textAlignment="center"
-            android:textColor="#689F38"
-            android:textSize="20dp" />
+    <TextView
+        android:id="@+id/output"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:text="I have detected a Cat"
+        android:textAlignment="center"
+        android:textColor="@color/orange_900"
+        android:textSize="26sp"
+        android:layout_marginBottom="100dp"
+        android:layout_gravity="center_horizontal|bottom"
+            />
 
-    </RelativeLayout>
+    <include
+        android:id="@+id/custom_bar"
+        layout="@layout/custom_bar"></include>
 
 </FrameLayout>
