@@ -26,7 +26,8 @@
             <TextView
                 android:layout_width="275dp"
                 android:layout_height="wrap_content"
-                android:text="Our kitty's got the purrfect eye! Take photos with our feline friend and let him guess its species!"
+                android:text="Our kitty's got the purrfect eye! Take a photo, and let Kevin the cat guess the animal in it!"
+
                 android:textSize="20sp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"
@@ -78,7 +79,7 @@
             <TextView
                 android:layout_width="275dp"
                 android:layout_height="wrap_content"
-                android:text="Kitty quizmaster at your service! Take our quiz with our feline friend and become an animal expert in no time!"
+                android:text="Kitty quizmaster at your service! Have a go at a quiz that Kev has got for you!"
                 android:textSize="20sp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="15dp"
@@ -96,9 +97,6 @@
             android:layout_below="@id/explanation3"
             android:layout_alignParentEnd="true"
             />
-
-
-
 
     </RelativeLayout>
 

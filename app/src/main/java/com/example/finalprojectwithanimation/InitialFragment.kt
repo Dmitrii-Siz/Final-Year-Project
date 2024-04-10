@@ -66,8 +66,6 @@ class InitialFragment : Fragment() {
             // Update the text message:
             val messageTextView: TextView = view.findViewById(R.id.messageTextView)
             messageTextView.text = "Alright, either way, enjoy your exploration!"
-
-
         }
 
 

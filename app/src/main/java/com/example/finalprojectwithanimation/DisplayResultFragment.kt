@@ -1,23 +1,24 @@
 package com.example.finalprojectwithanimation
 
 import android.graphics.Bitmap
-import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.widget.Button
+
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.VideoView
-//ml model stuff:
-import com.example.finalprojectwithanimation.ml.Model
-import org.tensorflow.lite.DataType
-import org.tensorflow.lite.support.image.TensorImage
-import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+
+
+import java.io.ByteArrayOutputStream
+import java.net.HttpURLConnection
+import java.net.URL
+
 
 private const val ARG_IMAGE = "param1"
 
@@ -27,6 +28,8 @@ private const val ARG_IMAGE = "param1"
 class DisplayResultFragment : Fragment() {
 
     private var imageBitmap: Bitmap? = null//save the image
+
+    private var displayOut: TextView? = null
 
     //default method:
     override fun onCreateView(
@@ -46,15 +49,15 @@ class DisplayResultFragment : Fragment() {
         //videoView:
         val videoView: VideoView = view.findViewById(R.id.videoViewDisplay)
         //animal name textView:
-        val displayOut = view.findViewById<TextView>(R.id.output)
-        displayOut.visibility = View.GONE
+        displayOut = view.findViewById<TextView>(R.id.output)
+        requireActivity().runOnUiThread {displayOut?.visibility = View.GONE}
 
         //display the bitmap image in viewImage:
         imageBitmap?.let { bitmap ->
             view.findViewById<ImageView>(R.id.image).setImageBitmap(bitmap)
         }
         //resize the image to match the model's input parameters:
-        val scaledBitmap = imageBitmap?.let { Bitmap.createScaledBitmap(it, 255, 255, false) }
+        val scaledBitmap = preprocessImage(imageBitmap!!)
 
 
         //Animation Stuff:
@@ -70,7 +73,7 @@ class DisplayResultFragment : Fragment() {
                 mediaPlayer.start()
                 videoView.setOnCompletionListener {
                     // Make displayOut visible
-                    displayOut.visibility = View.VISIBLE
+                    requireActivity().runOnUiThread {displayOut?.visibility = View.VISIBLE}
                 }
             }
         }
@@ -79,64 +82,83 @@ class DisplayResultFragment : Fragment() {
             mediaPlayer.start()
         }
 
+        //converting the image into a byte array:
+        val byteArrayImage = bitmapToByteArray(scaledBitmap)
 
 
+        //Connecting to the server and getting a response:
+        SendImageTask(byteArrayImage)
+
+    }
 
 
-        //model itself:
-        val model = Model.newInstance(requireContext())
+    //Function to convert the image to a byte array
+    private fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
+        val outputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+        return outputStream.toByteArray()
+    }
 
-        val tensorImg = TensorImage(DataType.FLOAT32)
-        tensorImg.load(scaledBitmap)//pass the img to the tensorImage
-        val byteBuffer = tensorImg.buffer//load the image from the buffer
+    //Function to preprocess the image - resize it
+    private fun preprocessImage(bitmap: Bitmap): Bitmap {
+        // Resize image to 255x255
+        return Bitmap.createScaledBitmap(bitmap, 255, 255, false)
+    }
 
-        //input feature - matches the model one:
-        val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 255, 255, 3), DataType.FLOAT32)
-        inputFeature0.loadBuffer(byteBuffer)
+    private fun SendImageTask(imageData: ByteArray){
+        //request url
+        val secret = getString(R.string.url)
+        val url = URL(secret)
 
-        //generates model output:
-        val outputs = model.process(inputFeature0)
-        val outputFeature0 = outputs.outputFeature0AsTensorBuffer
-
-        //closes the model
-        model.close()
-
-        //list of outputs:
-        val animalNames = listOf(
-            "badger", "bat", "bee", "beetle", "butterfly", "cat", "caterpillar", "cockroach", "cow", "crab", "crow", "deer", "dog", "donkey", "dragonfly", "duck", "eagle", "fly", "fox", "goat", "goose", "grasshopper", "hamster", "hare", "hedgehog", "horse", "ladybugs", "lobster", "mosquito", "moth", "mouse", "otter", "owl", "parrot", "pig", "pigeon", "racoon", "rat", "sheep", "snake", "sparrow", "squirrel", "swan", "turkey", "turtle", "woodpecker"
-        )
-
-        //find index with highest probability:
-        var maxProbability = Float.MIN_VALUE
-        var predictedClassIndex = -1
-        //get the predicted class:
-        for (i in outputFeature0.floatArray.indices) {
-            if (outputFeature0.floatArray[i] > maxProbability) {
-                maxProbability = outputFeature0.floatArray[i]
-                predictedClassIndex = i
+        //Global scope - performs operations on a background I/O thread
+        GlobalScope.launch(Dispatchers.IO) {
+            var response = ""
+            val connection = url.openConnection() as HttpURLConnection
+            connection.apply {
+                // Set request method
+                requestMethod = "POST"
+                // Set request headers
+                setRequestProperty("Content-Type", "application/octet-stream")//sending byte array
+                setRequestProperty("charset", "utf-8")
+                setRequestProperty("Content-Length", imageData.size.toString())
+                setRequestProperty("Connection", "Keep-Alive")
+                // Enable input and output streams
+                doOutput = true
+                doInput = true
             }
-        }
-        //get the predicted animal name
-        val predictedAnimalName = if (predictedClassIndex != -1) {
-            animalNames.getOrElse(predictedClassIndex) { "Unknown" }
-        } else {
-            "Unknown"
-        }
 
-        displayOut.text = "I have detected a ${predictedAnimalName.capitalize()}"
+            //Write image data to output stream
+            connection.outputStream.use { outputStream ->
+                outputStream.write(imageData)
+            }
 
-        //Testing purposes
-//        println("Probabilities:")
-//        for (i in outputFeature0.floatArray.indices) {
-//            val probability = outputFeature0.floatArray[i]
-//            val animalName = animalNames.getOrElse(i) { "Unknown" }
-//            println("$animalName: $probability")
-//        }
+            //Get response from the server:
+            response = connection.inputStream.bufferedReader().use {
+                it.readText()
+            }
+
+            var output = processOutput(response)
+
+            requireActivity().runOnUiThread {
+                //Displaying the predicted animal
+                displayOut?.text = "I have detected a ${output}"
+            }
+
+        }
+    }
+
+    //Currently only filters out the output by removing the "" marks
+    //in the future this could be a function to validate the response from the server
+    private fun processOutput(response: String): String {
+        // Removing surrounding quotes
+        var processedResponse = response.removeSurrounding("\"")
+        // Capitalizing the string
+        processedResponse = processedResponse.capitalize()
+        return processedResponse
     }
 
     //static method (responsible for processing the arguments that were passed into the fragment):
     companion object {
-        @JvmStatic
         fun newInstance(param1: Bitmap): DisplayResultFragment {
             val fragment = DisplayResultFragment()
             val args = Bundle()

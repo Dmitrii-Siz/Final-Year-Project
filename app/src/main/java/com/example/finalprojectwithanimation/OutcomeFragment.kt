@@ -45,6 +45,9 @@ class OutcomeFragment : Fragment() {
         //Update the Message Depending on the Score with a when statement
         //Update the progress bar colour and encouragement message alongside:
         when {
+            (totalCorrect > 7) -> {
+                progressBar.progressDrawable.setTint(ContextCompat.getColor(requireContext(), R.color.green_700))
+            }
             (totalCorrect in 5..7) -> {
                 outcomeMessage.text = "Keep Pushing Forward!"
                 outcomeMessage.setTextColor(ContextCompat.getColor(requireContext(), R.color.orange_800))
