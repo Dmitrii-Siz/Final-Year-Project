@@ -2,10 +2,12 @@ package com.example.finalprojectwithanimation
 
 import android.net.Uri
 import  android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.MediaController
 import android.widget.TextView
 import android.widget.VideoView
@@ -31,6 +33,7 @@ class InitialFragment : Fragment() {
         //Load the Animation:
         val videoview: VideoView = view.findViewById(R.id.videoView)
         val videoPath = "android.resource://${requireContext().packageName}/${R.raw.welcome_first_time}"
+        val imgView: ImageView = view.findViewById(R.id.temp)
 
         //set the media Controller:
         val mediaController = MediaController(requireContext())
@@ -38,6 +41,12 @@ class InitialFragment : Fragment() {
         videoview.setVideoURI(Uri.parse(videoPath))
         videoview.requestFocus()
         videoview.start()
+        //delay the appearance of the animation video:
+        videoview.visibility = View.VISIBLE
+        Handler().postDelayed({
+            imgView.visibility = View.GONE
+
+        }, 1401)
 
         // Load the sad animation:
         val sadVideoPath = "android.resource://${requireContext().packageName}/${R.raw.sad_anim}"
@@ -62,10 +71,16 @@ class InitialFragment : Fragment() {
             videoview.setVideoURI(Uri.parse(sadVideoPath))
             videoview.requestFocus()
             videoview.start()
-
             // Update the text message:
             val messageTextView: TextView = view.findViewById(R.id.messageTextView)
-            messageTextView.text = "Alright, either way, enjoy your exploration!"
+            videoview.setOnCompletionListener {
+                messageTextView.text = "Either way, enjoy your exploration!"
+            }
+            Handler().postDelayed({
+                messageTextView.text = "Alright..."
+
+            }, 2500)
+
         }
 
 

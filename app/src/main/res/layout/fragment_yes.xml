@@ -90,13 +90,28 @@
             android:id="@+id/custom_bar"
             layout="@layout/custom_bar" />
 
-        <VideoView
-            android:id="@+id/videoView3"
+        <FrameLayout
             android:layout_width="250dp"
             android:layout_height="200dp"
             android:layout_below="@id/explanation3"
             android:layout_alignParentEnd="true"
-            />
+            >
+
+            <VideoView
+                android:id="@+id/videoView3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible"
+                />
+            <ImageView
+                android:id="@+id/temp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white" />
+
+
+        </FrameLayout>
+
 
     </RelativeLayout>
 

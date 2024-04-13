@@ -2,6 +2,7 @@ package com.example.finalprojectwithanimation
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -48,6 +49,8 @@ class DisplayResultFragment : Fragment() {
 
         //videoView:
         val videoView: VideoView = view.findViewById(R.id.videoViewDisplay)
+        val imgView: ImageView = view.findViewById(R.id.temp)
+
         //animal name textView:
         displayOut = view.findViewById<TextView>(R.id.output)
         requireActivity().runOnUiThread {displayOut?.visibility = View.GONE}
@@ -78,9 +81,13 @@ class DisplayResultFragment : Fragment() {
             }
         }
         //playing the 1st animation
-        videoView.setOnPreparedListener { mediaPlayer ->
-            mediaPlayer.start()
-        }
+        videoView.start()
+        //delay the appearance of the animation video:
+        videoView.visibility = View.VISIBLE
+        Handler().postDelayed({
+            imgView.visibility = View.GONE
+
+        }, 1301)
 
         //converting the image into a byte array:
         val byteArrayImage = bitmapToByteArray(scaledBitmap)
