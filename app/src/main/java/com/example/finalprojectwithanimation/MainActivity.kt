@@ -3,12 +3,14 @@ package com.example.finalprojectwithanimation
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        disableNightMode()
         setContentView(R.layout.activity_main)
 
 
@@ -19,6 +21,9 @@ class MainActivity : AppCompatActivity() {
 
         if(alreadyOpened.equals("Yes")){
             //Not the first time of the user opening the App:
+            val editor = preferences.edit()
+            editor.putString("AlreadyOpened", "")
+            editor.apply()
             //Welcome back fragment:
             val welcomebackFragment = WelcomeBackFragment()
             supportFragmentManager.beginTransaction()
@@ -79,5 +84,9 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.frameLayout, fragment)
             .commit()
+    }
+
+    private fun disableNightMode() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 }

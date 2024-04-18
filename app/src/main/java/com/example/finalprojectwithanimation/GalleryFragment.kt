@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import java.io.IOException
@@ -23,6 +24,7 @@ class GalleryFragment : Fragment() {
     //global variables:
     private lateinit var nextButton: Button//next fragment button
     private var bitmapImage: Bitmap? = null//image
+    private lateinit var description: TextView //global variable for the description
 
     //Choose photo button:
     private lateinit var singleImagePickerBtn: Button
@@ -35,7 +37,13 @@ class GalleryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_gallery, container, false)
+        val screenWidthDp = resources.configuration.screenHeightDp
+        //Displaying different fragments depending on the height of the screen:
+        val layoutResId = when {
+            screenWidthDp >= 650 -> R.layout.fragment_gallery
+            else -> R.layout.fragment_gallery_small
+        }
+        return inflater.inflate(layoutResId, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,6 +58,9 @@ class GalleryFragment : Fragment() {
         nextButton = view.findViewById(R.id.nextButton)
         nextButton.visibility = View.GONE
 
+        //locate description variable:
+        description = view.findViewById(R.id.description)
+
         //set the image to the selected image
         val singlePhotoPickerLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             //displays the image
@@ -63,6 +74,8 @@ class GalleryFragment : Fragment() {
                 if (bitmapImage != null) {
                     //make the next button visible and accessible:
                     nextButton.visibility = View.VISIBLE
+                    //hide description:
+                    description.visibility = View.GONE
                     singleImagePickerBtn.text = "Choose Another"
                 }
                 else{

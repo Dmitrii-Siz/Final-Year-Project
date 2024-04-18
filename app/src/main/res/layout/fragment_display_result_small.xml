@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DisplayResultFragment">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_gravity="top|right"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="85dp"
+        android:elevation="10dp"
+        />
+
+    <FrameLayout
+        android:layout_width="260dp"
+        android:layout_height="180dp"
+        android:layout_gravity="center_vertical|left"
+        android:layout_marginLeft="-35dp"
+        >
+
+        <VideoView
+            android:id="@+id/videoViewDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            ></VideoView>
+
+        <ImageView
+            android:id="@+id/temp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/output"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="I have detected a Cat"
+        android:textAlignment="center"
+        android:textColor="@color/orange_900"
+        android:textSize="22sp"
+        android:layout_marginBottom="50dp"
+        android:layout_gravity="center_horizontal|bottom"
+        />
+
+    <include
+        android:id="@+id/custom_bar"
+        layout="@layout/custom_bar_small"></include>
+
+</FrameLayout>

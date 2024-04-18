@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,50 +17,50 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Animal Expert Achieved!"
-            android:textSize="28sp"
+            android:textSize="22sp"
             android:textColor="@color/green_700"
-            android:layout_marginTop="100dp"
-            android:padding="8dp"/>
+            android:layout_marginTop="70dp"
+            android:padding="6dp"/>
         <TextView
             android:id="@+id/encouragementMessage"
-            android:layout_width="400dp"
+            android:layout_width="310dp"
             android:layout_height="wrap_content"
             android:text="Congratulations on becoming an animal expert! Keep exploring the fascinating world of animals!"
-            android:textSize="20sp"
+            android:textSize="14sp"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:padding="4dp"/>
+            android:padding="2dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Your Quiz Score is:"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_marginTop="5dp"
             android:padding="8dp"/>
 
         <RelativeLayout
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
             android:layout_marginTop="10dp">
 
             <ProgressBar
                 android:id="@+id/circularProgressBar"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
                 android:layout_centerInParent="true"
-                android:indeterminate="false"
                 android:max="10"
+                android:progressDrawable="@drawable/circular_progress_bar"
                 android:progress="0"
-                android:progressDrawable="@drawable/circular_progress_bar" />
+                android:indeterminate="false"/>
 
             <TextView
                 android:id="@+id/percentageTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:textSize="44sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 android:text=""
                 android:textColor="@android:color/black"/>
@@ -73,6 +72,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
             android:gravity="center">
+
             >
 
             <androidx.appcompat.widget.AppCompatButton
@@ -83,10 +83,9 @@
                 android:background="@drawable/custom_blue_button"
                 android:text="Review"
                 android:textColor="@color/white"
-                android:textSize="16sp"
-                android:layout_marginEnd="8dp"
+                android:textSize="14sp"
+                android:layout_marginEnd="4dp"
                 />
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/playagainButton"
                 android:layout_width="wrap_content"
@@ -94,15 +93,14 @@
                 android:background="@drawable/custom_white_button"
                 android:text="Play Again"
                 android:textColor="@color/blue_800"
-                android:textSize="16sp"
-                android:layout_marginStart="8dp"
+                android:textSize="14sp"
+                android:layout_marginStart="4dp"
                 />
         </LinearLayout>
-
 
     </LinearLayout>
 
     <include
         android:id="@+id/custom_bar"
-        layout="@layout/custom_bar"></include>
+        layout="@layout/custom_bar_small"></include>
 </FrameLayout>

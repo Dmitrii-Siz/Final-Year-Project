@@ -37,7 +37,14 @@ class GameFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_game, container, false)
+        //Displaying different fragments depending on the height of the screen:
+        val screenWidthDp = resources.configuration.screenHeightDp
+        val layoutResId = when {
+            screenWidthDp >= 650 -> R.layout.fragment_game
+            else -> R.layout.fragment_game_small
+        }
+
+        val view = inflater.inflate(layoutResId, container, false)
         //locate the buttons and labels:
         factTextView = view.findViewById(R.id.factTextView)
         trueButton = view.findViewById(R.id.true_option)

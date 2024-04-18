@@ -1,0 +1,118 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".YesFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id="@+id/explanation1"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@+id/custom_bar"
+            android:layout_marginTop="8dp">
+
+            <ImageView
+                android:layout_marginLeft="5dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_camera"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:text="Our kitty's got the purrfect eye! Take a photo, and let Kevin the cat guess the animal in it!"
+
+                android:textSize="14sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="7dp"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/explanation2"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_below="@id/explanation1"
+            android:layout_marginTop="8dp">
+
+            <ImageView
+                android:layout_marginLeft="5dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_gallery"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:text="Whiskered wonders gallery awaits! Share your best shots and let our cat companion uncover wildlife wonders!"
+                android:textSize="14sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="7dp"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/explanation3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/explanation2"
+            android:layout_marginTop="8dp">
+
+            <ImageView
+                android:layout_marginLeft="5dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_quiz"
+                android:layout_gravity="center_vertical"/>
+
+            <TextView
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:text="Kitty quizmaster at your service! Have a go at a quiz that Kev has got for you!"
+                android:textSize="14sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="7dp"
+                />
+        </LinearLayout>
+
+        <include
+            android:id="@+id/custom_bar"
+            layout="@layout/custom_bar_small" />
+
+        <FrameLayout
+            android:layout_width="220dp"
+            android:layout_height="180dp"
+            android:layout_below="@id/explanation3"
+            android:layout_alignParentEnd="true"
+            >
+
+            <VideoView
+                android:id="@+id/videoView3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible"
+                />
+            <ImageView
+                android:id="@+id/temp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white" />
+
+
+        </FrameLayout>
+
+
+    </RelativeLayout>
+
+</FrameLayout>

@@ -17,20 +17,34 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="151dp"
-        android:layout_gravity="bottom|center_horizontal">
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="50dp"
+        >
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/captureButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@id/nextButton"
-            android:layout_alignStart="@id/nextButton"
             android:layout_marginBottom="20dp"
             android:gravity="center_horizontal"
             android:text="Take Photo"
             android:background="@drawable/custom_blue_button"
             android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
             android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="300dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/captureButton"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textColor="@color/orange_900"
+            android:text="Take a photo of an animal and let Kevin identify it!"
+            />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/nextButton"

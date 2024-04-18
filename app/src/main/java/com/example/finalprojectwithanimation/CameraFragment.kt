@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.Manifest
 import android.content.pm.PackageManager
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 
@@ -29,13 +30,20 @@ class CameraFragment : Fragment() {
     private var bitmapImage: Bitmap? = null//image
     private lateinit var captureButton: Button //Global variable
     private lateinit var imageView: ImageView //global variable for the image
+    private lateinit var description: TextView //global variable for the description
 
     //default onCreate fragment method:
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_camera, container, false)
+        val screenWidthDp = resources.configuration.screenHeightDp
+        //Displaying different fragments depending on the height of the screen:
+        val layoutResId = when {
+            screenWidthDp >= 650 -> R.layout.fragment_camera
+            else -> R.layout.fragment_camera_small
+        }
+        return inflater.inflate(layoutResId, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,6 +58,9 @@ class CameraFragment : Fragment() {
         //default image for the imageView:
         imageView = requireView().findViewById(R.id.image)
         imageView.setImageResource(R.drawable.kev_with_camera)
+
+        //description text view:
+        description = view.findViewById(R.id.description)
 
 
 
@@ -131,6 +142,7 @@ class CameraFragment : Fragment() {
             imageView.setImageBitmap(bitmapImage)
             //make the next button visible and accessible:
             nextButton.visibility = View.VISIBLE
+            description.visibility = View.GONE
             captureButton.text = "Retake Photo"
         }
     }

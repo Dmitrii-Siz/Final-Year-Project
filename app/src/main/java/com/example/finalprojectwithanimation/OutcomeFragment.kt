@@ -22,7 +22,14 @@ class OutcomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_outcome, container, false)
+        //Displaying different fragments depending on the height of the screen:
+        val screenWidthDp = resources.configuration.screenHeightDp
+        val layoutResId = when {
+            screenWidthDp >= 650 -> R.layout.fragment_outcome
+            else -> R.layout.fragment_outcome_small
+        }
+
+        val view = inflater.inflate(layoutResId, container, false)
 
         //Retrieve data from arguments
         arguments?.let {
@@ -33,6 +40,9 @@ class OutcomeFragment : Fragment() {
 
         //Review Button:
         val reviewButton = view.findViewById<Button>(R.id.reviewButton)
+
+        //Play again Button:
+        val pAgainButton = view.findViewById<Button>(R.id.playagainButton)
 
         //locate the message at the top (encouragement message and outcome message):
         val outcomeMessage: TextView = view.findViewById(R.id.outcomeMessage)
@@ -75,6 +85,15 @@ class OutcomeFragment : Fragment() {
             val reviewFragment = ReviewFragment.newInstance(improvementList!!)
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.replace(R.id.frameLayout, reviewFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
+        //Re-load the quiz game:
+        pAgainButton.setOnClickListener {
+            val gameFragment = GameFragment()
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.frameLayout, gameFragment)
             transaction.addToBackStack(null)
             transaction.commit()
         }

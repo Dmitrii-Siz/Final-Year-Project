@@ -37,8 +37,14 @@ class DisplayResultFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val screenWidthDp = resources.configuration.screenHeightDp
+        //Displaying different fragments depending on the height of the screen:
+        val layoutResId = when {
+            screenWidthDp >= 650 -> R.layout.fragment_display_result
+            else -> R.layout.fragment_display_result_small
+        }
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_display_result, container, false)
+        return inflater.inflate(layoutResId, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

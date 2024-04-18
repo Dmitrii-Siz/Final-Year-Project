@@ -20,7 +20,13 @@ class ReviewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         //XML
-        val view = inflater.inflate(R.layout.fragment_review, container, false)
+        val screenWidthDp = resources.configuration.screenHeightDp
+        //Displaying different fragments depending on the height of the screen:
+        val layoutResId = when {
+            screenWidthDp >= 650 -> R.layout.fragment_review
+            else -> R.layout.fragment_review_small
+        }
+        val view = inflater.inflate(layoutResId, container, false)
 
         //Retrieve data from arguments
         arguments?.let {

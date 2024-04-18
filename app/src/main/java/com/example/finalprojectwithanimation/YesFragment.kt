@@ -22,7 +22,12 @@ class YesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view_yes = inflater.inflate(R.layout.fragment_yes, container, false)
+        val screenWidthDp = resources.configuration.screenHeightDp
+        val layoutResId = when {
+            screenWidthDp >= 650 -> R.layout.fragment_yes
+            else -> R.layout.fragment_yes_small
+        }
+        val view_yes = inflater.inflate(layoutResId, container, false)
 
         //Load the Animation:
         val videoview: VideoView = view_yes.findViewById(R.id.videoView3)

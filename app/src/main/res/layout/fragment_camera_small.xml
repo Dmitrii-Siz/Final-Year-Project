@@ -3,47 +3,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GalleryFragment">
+    tools:context=".CameraFragment">
 
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="350dp"
-        android:layout_height="250dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_gravity="top|center_horizontal"
-        android:layout_marginTop="200dp"/>
+        android:layout_marginTop="110dp"
+        />
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="151dp"
+        android:layout_height="120dp"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="50dp"
         >
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/choosePhoto"
+            android:id="@+id/captureButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@id/nextButton"
-            android:layout_alignStart="@id/nextButton"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center_horizontal"
-            android:textColor="@color/white"
+            android:text="Take Photo"
             android:background="@drawable/custom_blue_button"
-            android:text="Upload Photo"
+            android:textColor="@color/white"
             android:layout_centerHorizontal="true"
-            android:textSize="22sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/description"
-            android:layout_width="300dp"
+            android:layout_width="240dp"
             android:layout_centerHorizontal="true"
             android:layout_height="wrap_content"
-            android:layout_below="@id/choosePhoto"
+            android:layout_below="@id/captureButton"
             android:textAlignment="center"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textColor="@color/orange_900"
-            android:text="Upload a photo of an animal and let Kevin identify it!"
+            android:text="Take a photo of an animal and let Kevin identify it!"
             />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -56,11 +55,13 @@
             android:textColor="@color/blue_800"
             android:background="@drawable/custom_white_button"
             android:text="Next"
-            android:textSize="18sp" />
+            android:textSize="14sp" />
     </RelativeLayout>
 
     <include
         android:id="@+id/custom_bar"
-        layout="@layout/custom_bar"></include>
+        layout="@layout/custom_bar_small"></include>
+
+
 
 </FrameLayout>

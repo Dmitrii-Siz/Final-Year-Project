@@ -1,15 +1,16 @@
 package com.example.finalprojectwithanimation
 
-import android.media.MediaPlayer.OnPreparedListener
+
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.MediaController
-import android.widget.TextView
+
 import android.widget.VideoView
 import androidx.fragment.app.Fragment
 
@@ -24,7 +25,13 @@ class WelcomeBackFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view2 = inflater.inflate(R.layout.fragment_welcome_back, container, false)
+        val screenWidthDp = resources.configuration.screenHeightDp
+        //Displaying different fragments depending on the height of the screen:
+        val layoutResId = when {
+            screenWidthDp >= 650 -> R.layout.fragment_welcome_back
+            else -> R.layout.fragment_welcome_back_small
+        }
+        val view2 = inflater.inflate(layoutResId, container, false)
 
         //Load the Animation:
         val vidview: VideoView = view2.findViewById(R.id.videoView2)

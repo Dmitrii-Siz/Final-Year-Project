@@ -3,6 +3,8 @@ package com.example.finalprojectwithanimation
 import android.net.Uri
 import  android.os.Bundle
 import android.os.Handler
+import android.util.Log
+
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,8 +25,15 @@ class InitialFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //--------------------------------------------------------------------
         //XML file:
-        val view = inflater.inflate(R.layout.fragment_initial, container, false)
+        val screenWidthDp = resources.configuration.screenHeightDp
+        //Displaying different fragments depending on the height of the screen:
+        val layoutResId = when {
+            screenWidthDp >= 650 -> R.layout.fragment_initial
+            else -> R.layout.fragment_initial_small
+        }
+        val view = inflater.inflate(layoutResId, container, false)
 
         //Locate both buttons:
         val yesButton: AppCompatButton = view.findViewById(R.id.yesButton)

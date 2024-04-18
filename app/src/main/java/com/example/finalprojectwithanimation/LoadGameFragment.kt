@@ -13,7 +13,13 @@ class LoadGameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_loadgame, container, false)
+        //Displaying different fragments depending on the height of the screen:
+        val screenWidthDp = resources.configuration.screenHeightDp
+        val layoutResId = when {
+            screenWidthDp >= 650 -> R.layout.fragment_loadgame
+            else -> R.layout.fragment_loadgame_small
+        }
+        return inflater.inflate(layoutResId, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
