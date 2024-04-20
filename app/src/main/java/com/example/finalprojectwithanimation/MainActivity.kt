@@ -21,9 +21,6 @@ class MainActivity : AppCompatActivity() {
 
         if(alreadyOpened.equals("Yes")){
             //Not the first time of the user opening the App:
-            val editor = preferences.edit()
-            editor.putString("AlreadyOpened", "")
-            editor.apply()
             //Welcome back fragment:
             val welcomebackFragment = WelcomeBackFragment()
             supportFragmentManager.beginTransaction()

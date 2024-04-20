@@ -21,6 +21,11 @@ import androidx.appcompat.widget.AppCompatButton
 
 class InitialFragment : Fragment() {
 
+
+    //Animation stuff:
+    private var videoview: VideoView? = null
+    private var currentPosition = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,18 +45,18 @@ class InitialFragment : Fragment() {
         val noButton: AppCompatButton = view.findViewById(R.id.noButton)
 
         //Load the Animation:
-        val videoview: VideoView = view.findViewById(R.id.videoView)
+        videoview = view.findViewById(R.id.videoView)
         val videoPath = "android.resource://${requireContext().packageName}/${R.raw.welcome_first_time}"
         val imgView: ImageView = view.findViewById(R.id.temp)
 
         //set the media Controller:
         val mediaController = MediaController(requireContext())
         mediaController.setAnchorView(videoview)
-        videoview.setVideoURI(Uri.parse(videoPath))
-        videoview.requestFocus()
-        videoview.start()
+        videoview!!.setVideoURI(Uri.parse(videoPath))
+        videoview!!.requestFocus()
+        videoview!!.start()
         //delay the appearance of the animation video:
-        videoview.visibility = View.VISIBLE
+        videoview!!.visibility = View.VISIBLE
         Handler().postDelayed({
             imgView.visibility = View.GONE
 
@@ -77,12 +82,12 @@ class InitialFragment : Fragment() {
             noButton.visibility = View.GONE
 
             //Replacing the previous animation:
-            videoview.setVideoURI(Uri.parse(sadVideoPath))
-            videoview.requestFocus()
-            videoview.start()
+            videoview!!.setVideoURI(Uri.parse(sadVideoPath))
+            videoview!!.requestFocus()
+            videoview!!.start()
             // Update the text message:
             val messageTextView: TextView = view.findViewById(R.id.messageTextView)
-            videoview.setOnCompletionListener {
+            videoview!!.setOnCompletionListener {
                 messageTextView.text = "Either way, enjoy your exploration!"
             }
             Handler().postDelayed({
@@ -94,6 +99,45 @@ class InitialFragment : Fragment() {
 
 
         return view
+    }
+
+    //Code for playing the animation if the screen is minimised:
+    override fun onStart() {
+        super.onStart()
+        videoview?.seekTo(currentPosition)
+        videoview?.start()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!videoview!!.isPlaying) {
+            videoview?.seekTo(currentPosition)
+            videoview?.start()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        videoview?.pause()
+        currentPosition = videoview?.currentPosition ?: 0
+    }
+
+    override fun onStop() {
+        videoview?.pause()
+        super.onStop()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt("position", currentPosition)
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        if (savedInstanceState != null) {
+            currentPosition = savedInstanceState.getInt("position")
+            videoview?.seekTo(currentPosition)
+        }
     }
 
 }

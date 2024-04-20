@@ -32,6 +32,10 @@ class DisplayResultFragment : Fragment() {
 
     private var displayOut: TextView? = null
 
+    //Aimation stuff:
+    private var videoView: VideoView? = null
+    private var currentPosition = 0
+
     //default method:
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,7 +58,7 @@ class DisplayResultFragment : Fragment() {
         imageBitmap = arguments?.getParcelable(ARG_IMAGE)
 
         //videoView:
-        val videoView: VideoView = view.findViewById(R.id.videoViewDisplay)
+        videoView = view.findViewById(R.id.videoViewDisplay)
         val imgView: ImageView = view.findViewById(R.id.temp)
 
         //animal name textView:
@@ -71,25 +75,25 @@ class DisplayResultFragment : Fragment() {
 
         //Animation Stuff:
         // Set video path to the first MP4 file
-        videoView.setVideoPath("android.resource://${requireContext().packageName}/${R.raw.thinking_anim}")
+        videoView!!.setVideoPath("android.resource://${requireContext().packageName}/${R.raw.thinking_anim}")
         //onComplete Listener for 1st animation:
-        videoView.setOnCompletionListener {
+        videoView!!.setOnCompletionListener {
             // Switch to the second MP4 file
-            videoView.setVideoPath("android.resource://${requireContext().packageName}/${R.raw.conclusion_anim}")
+            videoView!!.setVideoPath("android.resource://${requireContext().packageName}/${R.raw.conclusion_anim}")
             //onComplete Listener for 2nd animation:
-            videoView.setOnPreparedListener { mediaPlayer ->
+            videoView!!.setOnPreparedListener { mediaPlayer ->
                 //playing the 2nd animation once the first one is done
                 mediaPlayer.start()
-                videoView.setOnCompletionListener {
+                videoView!!.setOnCompletionListener {
                     // Make displayOut visible
                     requireActivity().runOnUiThread {displayOut?.visibility = View.VISIBLE}
                 }
             }
         }
         //playing the 1st animation
-        videoView.start()
+        videoView!!.start()
         //delay the appearance of the animation video:
-        videoView.visibility = View.VISIBLE
+        videoView!!.visibility = View.VISIBLE
         Handler().postDelayed({
             imgView.visibility = View.GONE
 
@@ -180,4 +184,45 @@ class DisplayResultFragment : Fragment() {
             return fragment
         }
     }
+
+    //Code for playing the animation if the screen is minimised:
+    override fun onStart() {
+        super.onStart()
+        videoView?.seekTo(currentPosition)
+        videoView?.start()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!videoView!!.isPlaying) {
+            videoView?.seekTo(currentPosition)
+            videoView?.start()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        videoView?.pause()
+        currentPosition = videoView?.currentPosition ?: 0
+    }
+
+    override fun onStop() {
+        videoView?.pause()
+        super.onStop()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt("position", currentPosition)
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        if (savedInstanceState != null) {
+            currentPosition = savedInstanceState.getInt("position")
+            videoView?.seekTo(currentPosition)
+        }
+    }
+
+
 }
