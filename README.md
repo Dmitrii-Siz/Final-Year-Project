@@ -8,8 +8,9 @@ Adobe Character Animator and Adobe Illustrator - Mascot design and animations
 Ngrok - Acts a tunnel to connect my image classification model to the GUI
 Python (Tensorflow - Keras) - Image Classification model developed
 
-Small Video Demo can be found 
-[![AniFinder Demo](https://www.youtube.com/watch?v=tqCyEpSSgD8)
+Short Video Demo can be found here:
+[![AniFinder Demo](https://img.youtube.com/vi/tqCyEpSSgD8/0.jpg)](https://www.youtube.com/watch?v=tqCyEpSSgD8)
+
 
 https://youtu.be/tqCyEpSSgD8
 
