@@ -9,5 +9,8 @@ Ngrok - Acts a tunnel to connect my image classification model to the GUI
 Python (Tensorflow - Keras) - Image Classification model developed
 
 Small Video Demo can be found 
+[![Video Title](https://img.youtube.com/vi/tqCyEpSSgD8/0.jpg)](https://www.youtube.com/watch?v=tqCyEpSSgD8)
+
 https://youtu.be/tqCyEpSSgD8
+
 
